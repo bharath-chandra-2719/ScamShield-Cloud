@@ -1,0 +1,29 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local databases
+scamshield.db
+*.sqlite
+*.sqlite3
+
+# Node.js
+node_modules/
+dist/
+.vite/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
