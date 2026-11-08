@@ -1,70 +1,22 @@
-# 🛡️ ScamShield – AI Phishing & Fraudulent Message Deconstructor
+# ScamShield – AI Phishing & Fraudulent Message Detection
 
-ScamShield is a web-based phishing and fraudulent message detection system designed to help users identify suspicious messages, understand potential threats, and stay safe from online scams.
+ScamShield is an AI-assisted web application designed to identify phishing messages, suspicious links, fraudulent requests, and potentially harmful communications.
 
-It analyzes text messages using a rule-based detection engine, identifies suspicious phrases, calculates a risk score from 0 to 100, classifies the threat level, and provides recommendations to help users avoid fraud.
+It analyzes user-submitted messages, identifies suspicious indicators, calculates a risk score, explains why a message may be dangerous, and provides safe next steps.
 
----
+## Features
 
-## 📌 1. Project Overview
+- **Message Analysis:** Analyze SMS, emails, and other text messages.
+- **Risk Score:** Assign a risk score between 0 and 100.
+- **Threat Classification:** Identify suspicious message categories.
+- **Indicator Extraction:** Highlight suspicious words, phrases, and links.
+- **Explanation:** Explain why a message may be suspicious.
+- **Safety Recommendations:** Provide suggested actions to help users stay safe.
+- **Threat History:** Store and view previously analyzed messages.
+- **Cloud Database:** Store analysis records in Supabase PostgreSQL.
+- **REST API:** FastAPI backend for communication between frontend and database.
 
-With the increasing use of digital payments, online banking, SMS, emails, and messaging platforms, phishing attacks and fraudulent messages have become common.
-
-ScamShield aims to provide a simple platform where users can paste suspicious messages and understand whether they may be fraudulent.
-
-The system examines suspicious words, phrases, urgency, payment requests, account threats, credential requests, and suspicious links to generate a security assessment.
-
-## 🎯 2. Objectives
-
-- Detect potentially fraudulent and phishing messages.
-- Identify suspicious words and phrases.
-- Calculate a threat score between 0 and 100.
-- Classify messages into different risk levels.
-- Explain why a message may be suspicious.
-- Provide safe next steps and recommendations.
-- Maintain a history of previously analyzed messages.
-
-## ✨ 3. Key Features
-
-### 1. Message Analysis
-Users can paste suspicious SMS messages, emails, or other text messages for analysis.
-
-### 2. Threat Score
-Each analyzed message receives a score from 0 to 100 based on detected warning signs.
-
-### 3. Risk Classification
-
-| Score | Risk Level |
-|---|---|
-| 0–34 | Low |
-| 35–59 | Medium |
-| 60–79 | High |
-| 80–100 | Critical |
-
-### 4. Suspicious Phrase Detection
-The system identifies warning signs such as:
-- Requests for OTPs, passwords, PINs, and CVVs.
-- Urgent payment requests.
-- Account blocking or suspension threats.
-- Suspicious verification links.
-- Impersonation of banks or official departments.
-
-### 5. Explanation of Threats
-ScamShield displays detected suspicious phrases along with explanations of why they may be dangerous.
-
-### 6. Safety Recommendations
-Users receive suggestions such as:
-- Do not share OTPs or passwords.
-- Avoid clicking suspicious links.
-- Do not transfer money to unknown accounts.
-- Verify messages through official channels.
-
-### 7. Threat History
-Previously analyzed messages can be stored and viewed using the SQLite database.
-
----
-
-## 🛠️ 4. Technologies Used
+## Technology Stack
 
 ### Frontend
 - React.js
@@ -76,36 +28,32 @@ Previously analyzed messages can be stored and viewed using the SQLite database.
 ### Backend
 - Python
 - FastAPI
-- Uvicorn
+- REST API
 
 ### Database
-- SQLite
+- SQLite for local development
+- Supabase PostgreSQL for cloud storage
 
-### Detection Engine
-- Python Regular Expressions
-- Rule-based suspicious phrase detection
-- Context-based risk scoring
+### Cloud Computing
+- Supabase – Cloud database
+- Render – Backend hosting
+- Vercel – Frontend hosting
 
----
-
-## 📂 5. Project Folder Structure
+## Project Structure
 
 ```text
 ScamShield/
 │
 ├── backend/
 │   ├── lib/
-│   │   ├── __init__.py
 │   │   ├── lm.py
 │   │   ├── db.py
 │   │   └── security.py
 │   │
 │   ├── models/
-│   │   ├── __init__.py
 │   │   └── verdict.py
 │   │
 │   ├── routers/
-│   │   ├── __init__.py
 │   │   ├── analyze.py
 │   │   └── history.py
 │   │
@@ -113,94 +61,78 @@ ScamShield/
 │   │   └── test_analyze.py
 │   │
 │   ├── requirements.txt
-│   ├── .env
 │   ├── .env.example
 │   └── server.py
 │
 ├── frontend/
 │   ├── public/
 │   ├── src/
-│   │   ├── assets/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── services/
-│   │   │   └── api.ts
 │   │   ├── App.tsx
 │   │   ├── main.tsx
 │   │   └── index.css
 │   │
-│   ├── index.html
 │   ├── package.json
-│   ├── tsconfig.json
 │   └── vite.config.ts
 │
 ├── README.md
 └── .gitignore
 ```
 
----
+## How ScamShield Works
 
-## ⚙️ 6. Installation and Setup
+1. The user enters a suspicious message into the application.
+2. The React frontend sends the message to the FastAPI backend.
+3. The backend analyzes the message using detection rules and risk-scoring logic.
+4. ScamShield identifies suspicious indicators and calculates a risk score.
+5. The application displays the threat category, explanation, and recommended safety steps.
+6. The analysis result is stored in the configured database.
+7. Users can view previously analyzed messages through the threat history feature.
 
-### Prerequisites
+## Installation and Local Setup
 
-Install the following before running the project:
+### 1. Clone the Repository
 
-- Python 3.10 or above
-- Node.js and npm
-- Visual Studio Code
+```bash
+git clone https://github.com/bharath-chandra-2719/ScamShield-Cloud.git
+cd ScamShield-Cloud
+```
 
-### Step 1: Download or Clone the Project
+### 2. Backend Setup
 
-Open the project folder in Visual Studio Code.
+Open a terminal:
 
-### Step 2: Setup the Backend
-
-Open the VS Code terminal and navigate to the backend folder:
-
-```powershell
+```bash
 cd backend
 ```
 
-Install the required Python packages:
+Create a virtual environment:
+
+```bash
+python -m venv venv
+```
+
+Activate it on Windows:
 
 ```powershell
+.\venv\Scripts\Activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Step 3: Setup the Frontend
+Configure environment variables using the `.env.example` file.
 
-Open another terminal and navigate to the frontend folder:
+For local SQLite development, configure the database path as required by the backend.
 
-```powershell
-cd frontend
-```
+Start the backend:
 
-Install the required Node.js packages:
-
-```powershell
-npm install
-```
-
----
-
-## ▶️ 7. How to Run the Project
-
-Whenever you close VS Code or shut down your computer, follow these steps to run ScamShield again.
-
-### Terminal 1 – Start the Backend
-
-Open the project in VS Code.
-
-Open the first terminal:
-
-```powershell
-cd backend
-```
-
-Start the FastAPI server:
-
-```powershell
+```bash
 python -m uvicorn server:app --reload --port 8000
 ```
 
@@ -210,14 +142,31 @@ Backend URL:
 http://localhost:8000
 ```
 
-### Terminal 2 – Start the Frontend
+API documentation:
 
-Open a second terminal by clicking the `+` button in the terminal panel.
+```text
+http://localhost:8000/docs
+```
 
-Run:
+### 3. Frontend Setup
 
-```powershell
+Open another terminal:
+
+```bash
 cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Configure the frontend API URL using the provided environment example.
+
+Start the frontend:
+
+```bash
 npm run dev
 ```
 
@@ -227,164 +176,63 @@ Frontend URL:
 http://localhost:5173
 ```
 
-### Step 3 – Open ScamShield
+## Cloud Integration
 
-Open your browser and visit:
+ScamShield uses cloud computing to make the application accessible beyond a local development environment.
 
-**http://localhost:5173**
+| Cloud Service | Purpose |
+|---|---|
+| Supabase | Cloud PostgreSQL database |
+| Render | FastAPI backend hosting |
+| Vercel | React frontend hosting |
 
-The ScamShield application should now be running.
+### Cloud Data Flow
 
-**Important:** Keep both terminal windows open while using the application.
+1. Users access ScamShield through the deployed frontend.
+2. The frontend communicates with the backend hosted on Render.
+3. The backend analyzes submitted messages.
+4. Analysis records are stored in the Supabase PostgreSQL database.
+5. Previous analysis records can be retrieved through the backend API.
 
----
+**Security:** Database connection credentials must remain in backend environment variables. Never expose database credentials in frontend code or commit `.env` files to GitHub.
 
-## 🔗 8. API Endpoints
-
-The backend provides the following API endpoints:
+## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/analyze-message` | Analyzes a suspicious message |
-| GET | `/api/threat-history` | Retrieves analysis history |
-| GET | `/health` | Checks backend health |
-| GET | `/` | Backend root endpoint |
+| POST | `/api/analyze-message` | Analyze a message |
+| GET | `/api/threat-history` | Retrieve analysis history |
+| GET | `/health` | Check backend health |
+| GET | `/` | Check API status |
 
-### API Documentation
+## Environment Variables
 
-FastAPI provides interactive API documentation.
+Backend environment variables are configured in `backend/.env`.
 
-Open:
+Example:
 
-```text
-http://localhost:8000/docs
+```env
+DATABASE_URL=your_supabase_postgresql_connection_string
+FRONTEND_URL=http://localhost:5173
 ```
 
-You can test the backend endpoints directly from the Swagger interface.
+Do not upload your actual `.env` file or database password to GitHub.
 
----
+For local SQLite usage, configure `DATABASE_PATH` if required.
 
-## 🔍 9. How ScamShield Works
+## Future Enhancements
 
-1. The user enters a suspicious message into the frontend.
-2. The frontend sends the message to the FastAPI backend.
-3. The backend validates the input.
-4. The detection engine checks for suspicious words and phrases.
-5. The system identifies warning categories and calculates a risk score.
-6. The message is classified into a risk level.
-7. An explanation and safety recommendations are generated.
-8. The analysis is stored in the SQLite database.
-9. The results are displayed on the frontend.
+- Advanced machine learning-based phishing classification.
+- Improved suspicious URL analysis.
+- Browser extension integration.
+- Real-time threat intelligence integration.
+- Multi-language phishing message detection.
+- Email integration for suspicious message analysis.
 
----
+## Disclaimer
 
-## 📊 10. Risk Scoring Method
+ScamShield is an educational and awareness-oriented security application. Its risk scores are heuristic indicators, not calibrated probabilities or guarantees that a message is safe or fraudulent. Users should independently verify suspicious communications before taking action.
 
-ScamShield uses a rule-based scoring mechanism.
+## Author
 
-Different categories of suspicious indicators have different weights.
-
-Examples include:
-
-- Credential theft requests.
-- Urgent or threatening language.
-- Account suspension threats.
-- Payment requests.
-- Suspicious links.
-- Impersonation of trusted organizations.
-
-Additional scoring adjustments are applied when multiple warning signs appear together.
-
-The final score is limited to a range of 0–100.
-
-**Note:** The score is a heuristic risk indicator, not a statistically calibrated probability that a message is fraudulent. A low score does not guarantee that a message is safe.
-
----
-
-## 🔐 11. Security Considerations
-
-- Never share real OTPs, passwords, PINs, or banking details.
-- Avoid clicking links in suspicious messages.
-- Verify important requests through official websites or customer support.
-- Keep API keys and other secrets private.
-- Do not upload confidential personal information for testing.
-
----
-
-## 🧪 12. Testing
-
-Test ScamShield using different types of messages:
-
-1. Phishing messages requesting OTPs.
-2. Fake bank account suspension alerts.
-3. Fraudulent payment requests.
-4. Suspicious verification links.
-5. Normal messages without suspicious requests.
-
-Compare the detected indicators, risk scores, and explanations.
-
----
-
-## ⚠️ 13. Troubleshooting
-
-### Problem 1: Uvicorn command not recognized
-
-Use:
-
-```powershell
-python -m uvicorn server:app --reload --port 8000
-```
-
-### Problem 2: npm is not recognized
-
-Install Node.js and restart VS Code.
-
-### Problem 3: ModuleNotFoundError
-
-Navigate to the backend folder and run:
-
-```powershell
-pip install -r requirements.txt
-```
-
-### Problem 4: Frontend packages missing
-
-Navigate to the frontend folder and run:
-
-```powershell
-npm install
-```
-
-### Problem 5: Frontend cannot connect to backend
-
-Make sure:
-- The backend is running on port 8000.
-- The frontend is running on port 5173.
-- The API base URL in the frontend configuration is correct.
-
----
-
-## 🚀 14. Future Enhancements
-
-- Email and URL reputation checking.
-- Multilingual phishing message detection.
-- Browser extension for real-time detection.
-- Machine learning-based phishing classification.
-- Improved detection of context-dependent scams.
-- Additional threat intelligence integration.
-
----
-
-## 👨‍💻 15. Conclusion
-
-ScamShield provides a simple and accessible approach to identifying potentially fraudulent messages. By combining suspicious phrase detection, rule-based risk scoring, explanations, and safety recommendations, the system helps users become more aware of phishing attempts and online fraud.
-
-The project demonstrates the practical use of React, FastAPI, Python, and SQLite in developing a cybersecurity awareness application.
-
----
-
-**Project Name:** ScamShield – AI Phishing & Fraudulent Message Deconstructor
-
-**Domain:** Cybersecurity / Fraud Detection
-
-**Project Type:** Full-Stack Web Application
+Developed as an academic project focused on cybersecurity awareness, phishing detection, and cloud computing.
